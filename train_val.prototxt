@@ -198,10 +198,10 @@ layer {
 }
 
 layer {
-  name: "conv5"
+  name: "conv4"
   type: "Convolution"
   bottom: "conv3"
-  top: "conv5"
+  top: "conv4"
   param {
     lr_mult: 1
     decay_mult: 1
@@ -226,16 +226,16 @@ layer {
   }
 }
 layer {
-  name: "relu5"
+  name: "relu4"
   type: "ReLU"
-  bottom: "conv5"
-  top: "conv5"
+  bottom: "conv4"
+  top: "conv4"
 }
 layer {
-  name: "pool5"
+  name: "pool4"
   type: "Pooling"
-  bottom: "conv5"
-  top: "pool5"
+  bottom: "conv4"
+  top: "pool4"
   pooling_param {
     pool: MAX
     kernel_size: 3
@@ -243,10 +243,10 @@ layer {
   }
 }
 layer {
-  name: "fc6"
+  name: "fc1"
   type: "InnerProduct"
-  bottom: "pool5"
-  top: "fc6"
+  bottom: "pool4"
+  top: "fc1"
   param {
     lr_mult: 1
     decay_mult: 1
@@ -268,26 +268,26 @@ layer {
   }
 }
 layer {
-  name: "relu6"
+  name: "relu5"
   type: "ReLU"
-  bottom: "fc6"
-  top: "fc6"
+  bottom: "fc1"
+  top: "fc1"
 }
 layer {
-  name: "drop6"
+  name: "drop1"
   type: "Dropout"
-  bottom: "fc6"
-  top: "fc6"
+  bottom: "fc1"
+  top: "fc1"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
 
 layer {
-  name: "fc8"
+  name: "fc2"
   type: "InnerProduct"
-  bottom: "fc6"
-  top: "fc8"
+  bottom: "fc1"
+  top: "fc2"
   param {
     lr_mult: 1
     decay_mult: 1
@@ -311,7 +311,7 @@ layer {
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "fc8"
+  bottom: "fc2"
   bottom: "label"
   top: "accuracy"
   include {
@@ -321,7 +321,7 @@ layer {
 layer {
   name: "loss"
   type: "SoftmaxWithLoss"
-  bottom: "fc8"
+  bottom: "fc2"
   bottom: "label"
   top: "loss"
 }
